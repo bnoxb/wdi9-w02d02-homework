@@ -68,12 +68,17 @@ const p1 = {
     hand: [],
     score: 0,
     roundsWon: 0,
+    cardHistory: [],
+    // playCard (numCard) {
+    //     checkDmg()
+    // }
 }
 const p2 = {
     name: 'AI - Random',
     hand: [],
     score: 0,
     roundsWon: 0,
+    cardHistory: [],
 }
 
 
@@ -94,7 +99,7 @@ const deal = (player) => {
     for (let i = 0; i < 3; i++){
         let ranNum = Math.round(Math.random() * (game.deck.length -1));
         player.hand.push(game.deck[ranNum]);
-        
+        player.cardHistory.push(game.deck[ranNum]);
         console.log(`${player.name} drew a ${game.deck[ranNum].name}`);
         game.deck.splice(ranNum, 1);
         //console.log(deck);
@@ -104,10 +109,7 @@ const deal = (player) => {
 
 const checkDmg = (player1, player2) => {
     for (let i = 0; i < 3; i++) {
-        // console.log(player1.hand[i]);
-        // console.log(player2.hand[i]);
-        // console.log(player1.score);
-        // console.log(player2.score);
+        //let ranNum = Math.round(Math.random() * (player2.hand.length - 1);
         let dmg1 = player1.hand[i].damage;
         let dmg2 = player2.hand[i].damage;
         console.log(`${player1.name} played a ${player1.hand[i].name} and did ${dmg1} damage!`);
