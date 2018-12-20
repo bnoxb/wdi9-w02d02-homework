@@ -1,4 +1,16 @@
 .main div {
     border: 5px solid blue;
-    
+    width: 100px;
+}
+.main img {
+    max-width: 100px;
+    max-height: 100px;
+}
+.second div {
+    border: 5px solid blue;
+    width: 100px;
+}
+.second img {
+    max-width: 100px;
+    max-height: 100px;
 }

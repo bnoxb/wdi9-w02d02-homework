@@ -69,6 +69,7 @@ const p1 = {
     score: 0,
     roundsWon: 0,
     cardHistory: [],
+    cssRow: '.main',
     // playCard (numCard) {
     //     checkDmg()
     // }
@@ -79,6 +80,7 @@ const p2 = {
     score: 0,
     roundsWon: 0,
     cardHistory: [],
+    cssRow: '.second',
 }
 
 
@@ -97,15 +99,24 @@ const setDeck = () => {
 
 const deal = (player) => {
     for (let i = 0; i < 3; i++){
+        
         let ranNum = Math.round(Math.random() * (game.deck.length -1));
-        player.hand.push(game.deck[ranNum]);
-        player.cardHistory.push(game.deck[ranNum]);
-        console.log(`${player.name} drew a ${game.deck[ranNum].name}`);
+        let theCard = game.deck[ranNum];
+          const theCardsInHand = $('<img>');  // setting a new img element
+          theCardsInHand.attr('src', 'images/card-back.jpg'); // applying the image to it
+          theCardsInHand.appendTo(player.cssRow); // applying where the image will go
+        player.hand.push(theCard);
+        player.cardHistory.push(theCard);
+        console.log(`${player.name} drew a ${theCard.name}`);
         game.deck.splice(ranNum, 1);
         //console.log(deck);
+
     }
     
 }
+// var img = $('<img id="dynamic">'); //Equivalent: $(document.createElement('img'))
+// img.attr('src', responseObject.imgurl);
+// img.appendTo('#imagediv');
 
 const checkDmg = (player1, player2) => {
     for (let i = 0; i < 3; i++) {
