@@ -89,7 +89,7 @@ const setDeck = () => {
         let ranNum = Math.round(Math.random() * (cards.length - 1));
         game.deck.push(cards[ranNum]);
         game.cardsDealt.push(cards[ranNum]);
-        console.log(`The Deck is shuffled! You may draw cards now...`);
+        $('#announcer').text(`The Deck is shuffled! You may draw cards now...`);
         cards.splice(ranNum, 1);
     }
     deal(p1);
@@ -114,18 +114,16 @@ const deal = (player) => {
     }
     
 }
-// var img = $('<img id="dynamic">'); //Equivalent: $(document.createElement('img'))
-// img.attr('src', responseObject.imgurl);
-// img.appendTo('#imagediv');
 
 const checkDmg = (player1, player2) => {
     for (let i = 0; i < 3; i++) {
         //let ranNum = Math.round(Math.random() * (player2.hand.length - 1);
         let dmg1 = player1.hand[i].damage;
         let dmg2 = player2.hand[i].damage;
-        console.log(`${player1.name} played a ${player1.hand[i].name} and did ${dmg1} damage!`);
-        console.log(`${player2.name} played a ${player2.hand[i].name} and did ${dmg2} damage!`);
-        
+        const $spanP1 = $('<span/>').text(`${player1.name} played a ${player1.hand[i].name} and did ${dmg1} damage! `)//console.log(`${player1.name} played a ${player1.hand[i].name} and did ${dmg1} damage!`);
+        const $spanP2 = $('<span/>').text(`${player2.name} played a ${player2.hand[i].name} and did ${dmg1} damage! `)//console.log(`${player2.name} played a ${player2.hand[i].name} and did ${dmg2} damage!`);
+        $('.announcer').append($spanP1);
+        $('.announcer').append($spanP2);
         
         if (dmg1 > dmg2) {
             console.log(`${player1.name} got a point!`);
@@ -142,20 +140,21 @@ const checkDmg = (player1, player2) => {
     }
     console.log(`${player1.name.toUpperCase()} score: ${player1.score}, ${player2.name.toUpperCase()} score:${player2.score}`);
     if (player1.score > player2.score) {
-        console.log(`${player1.name} has won!`);
+        const $divAnnounce = $('<div/>').text(`${player1.name} has won!`);
+        $('.wrapper').append($divAnnounce);
         player1.roundsWon++;
-        console.log(`${player1.name.toUpperCase()} ROUNDS WON:${player1.roundsWon} ||| ${player2.name.toUpperCase()} ROUNDS WON:${player2.roundsWon}`);
+        $('.scoreBoard').text(`${player1.name.toUpperCase()} ROUNDS WON:${player1.roundsWon} ||| ${player2.name.toUpperCase()} ROUNDS WON:${player2.roundsWon}`);
         player1.score = 0;
         player2.score = 0;
     } else if (player1.score<player2.score) {
-        console.log(`${player2.name} has won!`);
+        const $divAnnounce = $('<div/>').text(`${player2.name} has won!`);
         player2.roundsWon++;
-        console.log(`${player1.name.toUpperCase()} ROUNDS WON:${player1.roundsWon} ||| ${player2.name.toUpperCase()} ROUNDS WON:${player2.roundsWon}`);
+        $('.scoreBoard').text(`${player1.name.toUpperCase()} ROUNDS WON:${player1.roundsWon} ||| ${player2.name.toUpperCase()} ROUNDS WON:${player2.roundsWon}`);
         player1.score = 0;
         player2.score = 0;
     } else {
-        console.log(`It's a tie!!!`);
-        console.log(`${player1.name.toUpperCase()} ROUNDS WON:${player1.roundsWon} ||| ${player2.name.toUpperCase()} ROUNDS WON:${player2.roundsWon}`);
+        const $divAnnounce = $('<div/>').text(`It's a tie!!!`);
+        $('.scoreBoard').text(`${player1.name.toUpperCase()} ROUNDS WON:${player1.roundsWon} ||| ${player2.name.toUpperCase()} ROUNDS WON:${player2.roundsWon}`);
         player1.score = 0;
         player2.score = 0;
     }
